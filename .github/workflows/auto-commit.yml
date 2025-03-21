@@ -8,9 +8,13 @@ on:
 jobs:
   auto-commit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Explicitly set write permission to repository contents
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history so we can push properly
         
       - name: Setup Git
         run: |
@@ -21,10 +25,13 @@ jobs:
         run: |
           current_time=$(date "+%Y-%m-%d %H:%M:%S")
           random_number=$((RANDOM % 1000))
-          echo "Auto commit at $current_time - Random number: $random_number" > commit-log.txt
+          random_messages=("Auto update" "Daily commit" "Routine update" "Random change" "System update" "Automated commit" "Scheduled update")
+          random_index=$((RANDOM % ${#random_messages[@]}))
+          random_message="${random_messages[$random_index]}"
+          echo "$random_message at $current_time - Random number: $random_number" > commit-log.txt
           
       - name: Commit and push changes
         run: |
           git add commit-log.txt
-          git commit -m "Auto commit at $(date)"
+          git commit -m "$random_message at $(date)"
           git push
