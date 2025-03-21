@@ -1,4 +1,4 @@
-# One commit a day, keep your boss away
+# One commit a day, keep your work away
 
 - GitHub Actions workflow runs every 5 minutes
 - Push a random commit message from [whatthecommit.com](https://whatthecommit.com)
