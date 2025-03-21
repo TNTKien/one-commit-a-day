@@ -1,0 +1,30 @@
+name: Auto Commit
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Runs every 5 minutes
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Setup Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+      - name: Generate random message and update file
+        run: |
+          current_time=$(date "+%Y-%m-%d %H:%M:%S")
+          random_number=$((RANDOM % 1000))
+          echo "Auto commit at $current_time - Random number: $random_number" > commit-log.txt
+          
+      - name: Commit and push changes
+        run: |
+          git add commit-log.txt
+          git commit -m "Auto commit at $(date)"
+          git push
