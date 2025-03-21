@@ -5,14 +5,15 @@ This repository uses GitHub Actions to automatically make a commit with a random
 ## How It Works
 
 - GitHub Actions workflow runs every 5 minutes
-- A script generates a random message from a predefined list
-- The workflow automatically commits the changes to a file
-- The repository maintains a history of automatic commits
+- A script fetches a random commit message from [whatthecommit.com](https://whatthecommit.com)
+- The workflow automatically appends the timestamp and commit message to a log file
+- The repository maintains a history of all automatic commits
 
 ## Features
 
 - Completely automated - no manual intervention needed
-- Various random commit messages for more realistic commit history
+- Unique and often humorous commit messages from whatthecommit.com
+- Historical record of all commits is preserved in commit-log.txt
 - Easily customizable schedule (currently set to every 5 minutes)
 - Minimal resource usage
 
@@ -21,7 +22,7 @@ This repository uses GitHub Actions to automatically make a commit with a random
 You can monitor the activity of this bot by:
 1. Checking the commit history of this repository
 2. Viewing the Actions tab in GitHub to see the workflow runs
-3. Looking at the commit-log.txt file for the latest update
+3. Looking at the commit-log.txt file for the complete history of updates
 
 ## Purpose
 
@@ -31,5 +32,5 @@ This project demonstrates GitHub Actions' scheduling capabilities and automated 
 
 You can customize this bot by editing the `.github/workflows/auto-commit.yml` file:
 - Change the schedule by modifying the cron expression
-- Add more random messages to the array
+- Change the source of commit messages (currently using whatthecommit.com)
 - Modify what content gets updated in each commit

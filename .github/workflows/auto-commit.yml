@@ -23,15 +23,17 @@ jobs:
           
       - name: Generate random message and update file
         run: |
+          # Get current date and time
           current_time=$(date "+%Y-%m-%d %H:%M:%S")
-          random_number=$((RANDOM % 1000))
-          random_messages=("Auto update" "Daily commit" "Routine update" "Random change" "System update" "Automated commit" "Scheduled update")
-          random_index=$((RANDOM % ${#random_messages[@]}))
-          random_message="${random_messages[$random_index]}"
-          echo "$random_message at $current_time - Random number: $random_number" > commit-log.txt
+          
+          # Fetch a random commit message from whatthecommit.com
+          random_commit_message=$(curl -s https://whatthecommit.com/index.txt)
+          
+          # Append to the commit-log.txt file instead of overwriting
+          echo "$current_time - $random_commit_message" >> commit-log.txt
           
       - name: Commit and push changes
         run: |
           git add commit-log.txt
-          git commit -m "$random_message at $(date)"
+          git commit -m "$(curl -s https://whatthecommit.com/index.txt)"
           git push
