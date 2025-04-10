@@ -18,8 +18,8 @@ jobs:
         
       - name: Setup Git
         run: |
-          git config --global user.name 'TNTKien'
-          git config --global user.email 'iamneyk@gmail.com'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
       - name: Generate random message and update file
         run: |
